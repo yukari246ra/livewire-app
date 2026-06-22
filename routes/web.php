@@ -6,6 +6,7 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Livewire\CreatePost;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,14 +23,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('user-password.edit');
     Route::get('settings/appearance', Appearance::class)->name('appearance.edit');
 
-    // Route::get('settings/two-factor', TwoFactor::class)
-    //     ->middleware(
-    //         when(
-    //             Features::canManageTwoFactorAuthentication()
-    //                 && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
-    //             ['password.confirm'],
-    //             [],
-    //         ),
-    //     )
-    //     ->name('two-factor.show');
+    Route::get('/post/create', CreatePost::class)->name('post.create');
 });
