@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Livewire\CreatePost;
 use App\Livewire\ShowPosts;
+use App\Livewire\ShowPost;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('appearance.edit');
 
     Route::get('/posts/create', CreatePost::class)->name('posts.create');
+    Route::get('/posts/{post}', ShowPost::class)->name('post');
 });
 
 Route::get('/posts', ShowPosts::class)->name('posts');
