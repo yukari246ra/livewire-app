@@ -7,6 +7,8 @@ use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Livewire\CreatePost;
+use App\Livewire\EditPost;
+use App\Livewire\MyPosts;
 use App\Livewire\ShowPosts;
 use App\Livewire\ShowPost;
 
@@ -18,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
+
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('profile.edit');
@@ -27,6 +29,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/posts/create', CreatePost::class)->name('posts.create');
     Route::get('/posts/{post}', ShowPost::class)->name('post');
+    Route::get('/posts/{post}/edit', EditPost::class)->name('posts.edit');
+
+    Route::get('/my-posts', MyPosts::class)->name('my-posts');
 });
 
 Route::get('/posts', ShowPosts::class)->name('posts');

@@ -7,7 +7,7 @@
             </flux:button>
         @endauth
     </div>
-        
+
     @foreach ($posts as $post)
         <article class="p-4 shadow-lg">
             <a href="/posts/{{ $post->id }}">
@@ -17,5 +17,5 @@
                 <flux:text class="mt-4">投稿者: {{ $post->user->name }}</flux:text>
             </a>
         </article>
-    @endforeach    
+    @endforeach
 </div>
