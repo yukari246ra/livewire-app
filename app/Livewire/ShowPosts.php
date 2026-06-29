@@ -6,15 +6,30 @@ use App\Models\Post;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
+use Livewire\Attributes\Url;
+use Livewire\WithPagination;
 
 #[Layout('components.layouts.guest')]
 #[Title("記事一覧ページ")]
 class ShowPosts extends Component
 {
+    use WithPagination;
+
+    #[Url]
+    public $search ="";
+
+    public function updateSearch(){
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $posts = Post::with('user')->latest()->get();
+        $posts = Post::with('user')
+            ->where('title', 'like', '%'. $this->search . '%')
+            ->latest()
+            ->paginate(10);
+
         return view('livewire.show-posts', [
             'posts' => $posts
         ]);
